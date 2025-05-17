@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiricleDev | Modern Web Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #8A2BE2; /* Vibrant purple */
@@ -21,7 +24,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Clash Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
         
@@ -175,17 +178,57 @@
         }
         
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
             margin-bottom: 20px;
-            line-height: 1.2;
-            animation: fadeInUp 1s ease;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(138, 43, 226, 0.2);
+            letter-spacing: -0.02em;
         }
         
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--light-gray);
-            animation: fadeInUp 1s ease 0.2s forwards;
+        .hero-title span {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 5px;
+        }
+        
+        .hero-title span::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            opacity: 0.3;
+            transform: translateY(5px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
         }
         
@@ -206,6 +249,7 @@
             margin-bottom: 15px;
             position: relative;
             overflow: hidden;
+            z-index: 1;
             animation: fadeInUp 1s ease 0.4s forwards;
             opacity: 0;
         }
@@ -218,7 +262,8 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.6s ease;
+            transition: 0.5s;
+            z-index: -1;
         }
         
         .btn:hover::before {
@@ -495,23 +540,27 @@
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 30px;
+            padding: 20px;
         }
         
         .portfolio-item {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            height: 250px;
+            height: 300px;
             cursor: pointer;
             transition: all 0.5s ease;
+            background: rgba(25, 25, 25, 0.6);
+            border: 1px solid rgba(138, 43, 226, 0.2);
         }
         
         .portfolio-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            border-color: var(--primary);
         }
         
         .portfolio-img {
@@ -523,6 +572,7 @@
         
         .portfolio-item:hover .portfolio-img {
             transform: scale(1.1);
+            filter: brightness(0.7);
         }
         
         .portfolio-overlay {
@@ -531,12 +581,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            justify-content: flex-end;
+            padding: 30px;
             opacity: 0;
             transition: all 0.3s ease;
         }
@@ -546,16 +595,16 @@
         }
         
         .portfolio-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
             color: white;
-            transform: translateY(-20px);
+            transform: translateY(20px);
             transition: all 0.3s ease 0.1s;
         }
         
         .portfolio-category {
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 1.1rem;
             transform: translateY(20px);
             transition: all 0.3s ease 0.2s;
         }
@@ -565,100 +614,37 @@
             transform: translateY(0);
         }
         
-        /* Testimonial Section */
-        #testimonials {
-            padding: 100px 20px;
-            background: linear-gradient(to bottom, var(--dark) 0%, var(--darker) 100%);
-        }
-        
-        .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .testimonial-slider {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .testimonial-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        
-        .testimonial-slide {
-            min-width: 100%;
-            padding: 20px;
-        }
-        
-        .testimonial-card {
-            background: rgba(25, 25, 25, 0.6);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-            border: 1px solid rgba(138, 43, 226, 0.2);
+        .see-more-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-top: 20px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .testimonial-quote {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            color: var(--light-gray);
-        }
-        
-        .testimonial-author {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .testimonial-position {
-            color: var(--primary);
+        .see-more-btn i {
             font-size: 0.9rem;
         }
         
-        .testimonial-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 20px;
-            border: 3px solid var(--primary);
+        .portfolio-item:hover .see-more-btn {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .testimonial-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
-        
-        .testimonial-btn {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-btn:hover {
-            background: var(--primary);
-            color: white;
+        .see-more-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
         
         /* Contact Section */
@@ -1007,50 +993,122 @@
         
         .modal-content {
             background: var(--dark);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 800px;
-            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1000px;
+            padding: 40px;
             position: relative;
             transform: translateY(-50px);
             transition: all 0.3s ease;
             border: 1px solid var(--primary);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
         
         .modal.active .modal-content {
             transform: translateY(0);
         }
         
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: var(--light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .modal-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
-        .modal-close:hover {
-            color: var(--primary);
-            transform: rotate(90deg);
-        }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .modal-body {
-            margin-bottom: 30px;
+        .modal-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .modal-img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+        
+        .project-info {
+            background: rgba(25, 25, 25, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .project-info-item {
+            margin-bottom: 20px;
+        }
+        
+        .project-info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .project-info-item h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .project-info-item p {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tech-tag {
+            background: rgba(138, 43, 226, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .project-link {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .project-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* Responsive Styles */
@@ -1300,6 +1358,343 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        /* Enhanced Hero Section Styles */
+        .typing-container {
+            min-height: 60px;
+            margin-bottom: 30px;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            position: relative;
+            display: inline-block;
+        }
+
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: -5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(138, 43, 226, 0.2);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title span {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 5px;
+        }
+
+        .hero-title span::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            opacity: 0.3;
+            transform: translateY(5px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+        
+        /* Language Badge Styles */
+        .language-badge {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+        
+        .badge {
+            background: rgba(138, 43, 226, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        /* Limited Time Section Styles */
+        .limited-time-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown-content {
+            text-align: center;
+            padding: 50px;
+            background: rgba(25, 25, 25, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .countdown-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.2);
+            border-color: var(--primary);
+        }
+
+        .countdown-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 3s ease infinite;
+        }
+
+        .countdown-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            margin-bottom: 40px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .countdown-number::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .countdown-offer {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
+        }
+
+        .countdown-offer h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .countdown-offer p {
+            color: var(--light-gray);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .countdown-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .countdown-btn:hover::before {
+            left: 100%;
+        }
+
+        .countdown-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .countdown-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .countdown-timer {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+            }
+
+            .countdown-number {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1327,7 +1722,6 @@
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#process" class="nav-link">Process</a></li>
                 <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -1343,7 +1737,14 @@
         <div class="hero-container">
             <div class="hero-text">
                 <h1 class="hero-title neon">Transforming Ideas into <span style="color: var(--primary);">Digital Realities</span></h1>
-                <p class="hero-subtitle">We craft stunning, responsive, and interactive websites that elevate your brand and drive results.</p>
+                <div class="typing-container">
+                    <p class="hero-subtitle typing-text"></p>
+                </div>
+                <div class="language-badge">
+                    <span class="badge">🇬🇧 English</span>
+                    <span class="badge">🇪🇸 Spanish</span>
+                    <span class="badge">🌍 International</span>
+                </div>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn">Start Your Project</a>
                     <a href="#portfolio" class="btn btn-outline">View Our Work</a>
@@ -1364,7 +1765,7 @@
                     <i class="fas fa-laptop-code"></i>
                 </div>
                 <h3 class="service-title">Web Development</h3>
-                <p class="service-desc">Custom, responsive websites built using the latest technologies and frameworks to deliver exceptional user experiences.</p>
+                <p class="service-desc">Custom, responsive websites built using the latest technologies and frameworks. Fullstack web applications delivered in 1-4 days, depending on complexity.</p>
             </div>
 
             <div class="service-card hidden">
@@ -1372,7 +1773,7 @@
                     <i class="fas fa-palette"></i>
                 </div>
                 <h3 class="service-title">UI/UX Design</h3>
-                <p class="service-desc">Intuitive and engaging user interface designs that focus on enhancing usability and creating memorable experiences.</p>
+                <p class="service-desc">Intuitive and engaging user interface designs that focus on enhancing usability and creating memorable experiences. Rapid prototyping and implementation.</p>
             </div>
 
             <div class="service-card hidden">
@@ -1380,7 +1781,7 @@
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <h3 class="service-title">E-Commerce Solutions</h3>
-                <p class="service-desc">Secure and scalable online stores that drive conversions and provide seamless shopping experiences.</p>
+                <p class="service-desc">Secure and scalable online stores that drive conversions and provide seamless shopping experiences. Complete setup within 2-3 days.</p>
             </div>
 
             <div class="service-card hidden">
@@ -1388,7 +1789,7 @@
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <h3 class="service-title">Mobile-First Approach</h3>
-                <p class="service-desc">Websites optimized for all devices, ensuring a consistent experience across desktops, tablets, and smartphones.</p>
+                <p class="service-desc">Websites optimized for all devices, ensuring a consistent experience across desktops, tablets, and smartphones. Responsive design implementation in 1-2 days.</p>
             </div>
 
             <div class="service-card hidden">
@@ -1396,7 +1797,7 @@
                     <i class="fas fa-rocket"></i>
                 </div>
                 <h3 class="service-title">Performance Optimization</h3>
-                <p class="service-desc">Lightning-fast websites with optimized loading times and smooth interactions for maximum user satisfaction.</p>
+                <p class="service-desc">Lightning-fast websites with optimized loading times and smooth interactions for maximum user satisfaction. Quick optimization turnaround within 24 hours.</p>
             </div>
 
             <div class="service-card hidden">
@@ -1404,7 +1805,31 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <h3 class="service-title">SEO Integration</h3>
-                <p class="service-desc">Strategic implementation of SEO best practices to improve your visibility in search engines and drive organic traffic.</p>
+                <p class="service-desc">Strategic implementation of SEO best practices to improve your visibility in search engines and drive organic traffic. Basic SEO setup in 1 day.</p>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="service-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="service-title">Global Collaboration</h3>
+                <p class="service-desc">Working with clients worldwide, offering seamless communication in English and Spanish, with the flexibility to adapt to any language or timezone.</p>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="service-icon">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3 class="service-title">API Development</h3>
+                <p class="service-desc">Building robust and scalable APIs that power your applications, enabling seamless integration with third-party services and systems. API development in 1-2 days.</p>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="service-title">Security Implementation</h3>
+                <p class="service-desc">Implementing industry-standard security measures to protect your website and user data, including SSL certificates, data encryption, and secure authentication. Basic security setup in 1 day.</p>
             </div>
         </div>
     </section>
@@ -1482,101 +1907,87 @@
             </div>
             
             <div class="portfolio-grid">
-                <div class="portfolio-item hidden" data-category="web corporate">
-                    <img src="/api/placeholder/400/320" alt="Corporate Website" class="portfolio-img">
+                <div class="portfolio-item hidden" data-category="web">
+                    <img src="https://via.placeholder.com/400x320" alt="Chimba Stories Webapp" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Global Tech Solutions</h3>
-                        <p class="portfolio-category">Corporate Website</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item hidden" data-category="ecommerce">
-                    <img src="/api/placeholder/400/320" alt="E-Commerce Store" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Artisan Marketplace</h3>
-                        <p class="portfolio-category">E-Commerce</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item hidden" data-category="landing">
-                    <img src="/api/placeholder/400/320" alt="Product Launch" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">TechGadget Pro</h3>
-                        <p class="portfolio-category">Product Landing Page</p>
+                        <h3 class="portfolio-title">Chimba Stories</h3>
+                        <p class="portfolio-category">Fullstack Web Application</p>
+                        <button class="see-more-btn">See More</button>
                     </div>
                 </div>
                 
                 <div class="portfolio-item hidden" data-category="web">
-                    <img src="/api/placeholder/400/320" alt="Portfolio Website" class="portfolio-img">
+                    <img src="https://via.placeholder.com/400x320" alt="Rituo Webapp" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Creative Studio</h3>
-                        <p class="portfolio-category">Portfolio Website</p>
+                        <h3 class="portfolio-title">Rituo</h3>
+                        <p class="portfolio-category">Fullstack Web Application</p>
+                        <button class="see-more-btn">See More</button>
                     </div>
                 </div>
                 
-                <div class="portfolio-item hidden" data-category="ecommerce">
-                    <img src="/api/placeholder/400/320" alt="Fashion Store" class="portfolio-img">
+                <div class="portfolio-item hidden" data-category="landing">
+                    <img src="https://via.placeholder.com/400x320" alt="SilverSalts Media" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Fashion Forward</h3>
-                        <p class="portfolio-category">E-Commerce</p>
+                        <h3 class="portfolio-title">SilverSalts Media</h3>
+                        <p class="portfolio-category">Landing Page</p>
+                        <button class="see-more-btn">See More</button>
                     </div>
                 </div>
                 
-                <div class="portfolio-item hidden" data-category="corporate landing">
-                    <img src="/api/placeholder/400/320" alt="Service Landing Page" class="portfolio-img">
+                <div class="portfolio-item hidden" data-category="landing">
+                    <img src="https://via.placeholder.com/400x320" alt="Chimba Education" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Financial Advisory</h3>
-                        <p class="portfolio-category">Service Landing Page</p>
+                        <h3 class="portfolio-title">Chimba Education</h3>
+                        <p class="portfolio-category">Landing Page</p>
+                        <button class="see-more-btn">See More</button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item hidden" data-category="landing">
+                    <img src="https://via.placeholder.com/400x320" alt="MiricleDev Landing" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">MiricleDev</h3>
+                        <p class="portfolio-category">Landing Page</p>
+                        <button class="see-more-btn">See More</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-        <div class="section-title-container" style="text-align: center;">
-            <h2 class="section-title">Client Testimonials</h2>
-        </div>
-        <div class="testimonials-container">
-            <div class="testimonial-slider">
-                <div class="testimonial-track">
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="/api/placeholder/70/70" alt="Client Avatar" class="testimonial-avatar">
-                            <p class="testimonial-quote">"The team at MiricleDev exceeded all our expectations. They delivered a stunning website that perfectly captures our brand essence and has significantly improved our online conversion rates."</p>
-                            <h4 class="testimonial-author">Sarah Johnson</h4>
-                            <p class="testimonial-position">Marketing Director, TechGrowth Inc.</p>
-                        </div>
+    <!-- Limited Time Offer Section -->
+    <section id="limited-time" class="limited-time-section">
+        <div class="countdown-container">
+            <div class="countdown-content">
+                <h2 class="countdown-title">Limited Time Offer</h2>
+                <p class="countdown-subtitle">Secure Your Spot Now</p>
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Days</span>
                     </div>
-                    
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="/api/placeholder/70/70" alt="Client Avatar" class="testimonial-avatar">
-                            <p class="testimonial-quote">"Working with MiricleDev was a game-changer for our online presence. Their attention to detail, technical expertise, and creative approach resulted in an e-commerce platform that has boosted our sales by 75%."</p>
-                            <h4 class="testimonial-author">Michael Chen</h4>
-                            <p class="testimonial-position">Founder, Artisan Marketplace</p>
-                        </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
                     </div>
-                    
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <img src="/api/placeholder/70/70" alt="Client Avatar" class="testimonial-avatar">
-                            <p class="testimonial-quote">"From concept to execution, MiricleDev delivered excellence at every stage. Their responsive design and performance optimization strategies have significantly improved our user engagement metrics."</p>
-                            <h4 class="testimonial-author">Emma Roberts</h4>
-                            <p class="testimonial-position">COO, Global Solutions Ltd.</p>
-                        </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
                     </div>
                 </div>
-            </div>
-            
-            <div class="testimonial-controls">
-                <button class="testimonial-btn prev-btn">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="testimonial-btn next-btn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <div class="countdown-offer">
+                    <div class="offer-badge">Special Offer</div>
+                    <h3>Book Your Project Now</h3>
+                    <p>Limited spots available for our premium web development services. Don't miss out on transforming your digital presence!</p>
+                    <a href="#contact" class="countdown-btn">
+                        <span>Secure Your Spot</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1596,7 +2007,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="contact-text">
-                        <p>Derby, England, United Kingdom</p>
+                        <p>Birmingham, England, United Kingdom</p>
                     </div>
                 </div>
                 
@@ -1707,7 +2118,6 @@
                     <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
                     <li><a href="#process"><i class="fas fa-chevron-right"></i> Our Process</a></li>
                     <li><a href="#portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
-                    <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
                     <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
                 </ul>
             </div>
@@ -1729,7 +2139,7 @@
                 <div class="footer-contact">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="footer-contact-text">
-                        <p>Derby, England, United Kingdom</p>
+                        <p>Birmingham, England, United Kingdom</p>
                     </div>
                 </div>
                 
@@ -1766,29 +2176,31 @@
     <div class="modal" id="project-modal">
         <div class="modal-content">
             <button class="modal-close"><i class="fas fa-times"></i></button>
-            <h3 class="modal-title">Project Details</h3>
-            <div class="modal-body">
-                <img src="/api/placeholder/800/500" alt="Project Image" class="modal-img">
-                <p class="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</p>
+            <div class="modal-left">
+                <img src="https://via.placeholder.com/800x500" alt="Project Image" class="modal-img">
+                <h3 class="modal-title">Project Details</h3>
+                <p class="project-description"></p>
+            </div>
+            <div class="modal-right">
                 <div class="project-info">
                     <div class="project-info-item">
-                        <h4>Client:</h4>
-                        <p>Tech Company Ltd.</p>
+                        <h4>Client</h4>
+                        <p class="client-name"></p>
                     </div>
                     <div class="project-info-item">
-                        <h4>Category:</h4>
-                        <p>Web Design, E-Commerce</p>
+                        <h4>Category</h4>
+                        <p class="project-category"></p>
                     </div>
                     <div class="project-info-item">
-                        <h4>Date:</h4>
-                        <p>April 2025</p>
+                        <h4>Technologies</h4>
+                        <div class="project-tech"></div>
                     </div>
                     <div class="project-info-item">
-                        <h4>Technologies:</h4>
-                        <p>HTML5, CSS3, JavaScript, React</p>
+                        <h4>Testimonial</h4>
+                        <p class="project-testimonial"></p>
                     </div>
                 </div>
-                <a href="#" class="btn" style="margin-top: 20px;">Visit Website</a>
+                <a href="#" class="project-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
             </div>
         </div>
     </div>
@@ -1796,8 +2208,16 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <!-- Main JavaScript -->
     <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
+        })();
+
         // Preloader
         document.addEventListener('DOMContentLoaded', () => {
             const loader = document.querySelector('.loader');
@@ -1917,7 +2337,7 @@
         // Generate Particles
         const generateParticles = () => {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
+            const particleCount = 30;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -1933,6 +2353,8 @@
                 particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
                 particle.style.animationDelay = `${Math.random() * 5}s`;
                 
+                particle.style.boxShadow = `0 0 ${size}px ${size/2}px var(--primary-light)`;
+                
                 particlesContainer.appendChild(particle);
             }
         };
@@ -1945,9 +2367,7 @@
         
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
                 button.classList.add('active');
                 
                 const filterValue = button.getAttribute('data-filter');
@@ -1966,70 +2386,87 @@
             });
         });
         
-        // Testimonial Slider
-        const testimonialTrack = document.querySelector('.testimonial-track');
-        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        let currentIndex = 0;
-        
-        // Set initial width
-        testimonialTrack.style.width = `${testimonialSlides.length * 100}%`;
-        testimonialSlides.forEach(slide => {
-            slide.style.width = `${100 / testimonialSlides.length}%`;
-        });
-        
-        const goToSlide = (index) => {
-            if (index < 0) {
-                index = testimonialSlides.length - 1;
-            } else if (index >= testimonialSlides.length) {
-                index = 0;
+        // Project Details Data
+        const projectDetails = {
+            'Chimba Stories': {
+                description: 'A gamified language learning platform that teaches Spanish through AI-generated text-message style stories.',
+                client: 'Chimba Stories',
+                category: 'Fullstack Web Application',
+                technologies: ['React', 'Vite', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'JWT', 'AWS'],
+                testimonial: '"The platform has revolutionized how people learn Spanish." - CEO, Chimba Stories',
+                link: '#'
+            },
+            'Rituo': {
+                description: 'A habit-tracking application focused on 30-day challenges with advanced data visualization.',
+                client: 'Rituo',
+                category: 'Fullstack Web Application',
+                technologies: ['React', 'Vite', 'Tailwind CSS', 'Flask', 'PostgreSQL', 'Chart.js', 'D3.js'],
+                testimonial: '"The data visualization features and intuitive interface have made habit tracking engaging." - CEO, Rituo',
+                link: '#'
+            },
+            'SilverSalts Media': {
+                description: 'A marketing agency specializing in digital marketing solutions for martial arts schools.',
+                client: 'SilverSalts Media',
+                category: 'Landing Page',
+                technologies: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'Three.js'],
+                testimonial: '"The landing page effectively communicates our expertise in sports marketing." - CEO, SilverSalts Media',
+                link: '#'
+            },
+            'Chimba Education': {
+                description: 'A freelance service creating custom learning resources for schools.',
+                client: 'Chimba Education',
+                category: 'Landing Page',
+                technologies: ['HTML5', 'CSS3', 'JavaScript', 'Shopify API', 'GSAP'],
+                testimonial: '"The platform has helped us reach more schools and educators." - CEO, Chimba Education',
+                link: '#'
+            },
+            'MiricleDev': {
+                description: 'A modern, interactive landing page showcasing our web development services.',
+                client: 'MiricleDev',
+                category: 'Landing Page',
+                technologies: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'Intersection Observer API'],
+                testimonial: '"Our landing page serves as a testament to our commitment to creating exceptional web experiences." - CEO, MiricleDev',
+                link: '#'
             }
-            
-            currentIndex = index;
-            testimonialTrack.style.transform = `translateX(-${currentIndex * (100 / testimonialSlides.length)}%)`;
         };
-        
-        prevBtn.addEventListener('click', () => {
-            goToSlide(currentIndex - 1);
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            goToSlide(currentIndex + 1);
-        });
-        
-        // Auto slide testimonials
-        setInterval(() => {
-            goToSlide(currentIndex + 1);
-        }, 5000);
-        
-        // Modal for Portfolio Items
+
+        // Update Modal for Portfolio Items
         const portfolioModal = document.getElementById('project-modal');
         const modalClose = document.querySelector('.modal-close');
         
-        portfolioItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Update modal content based on portfolio item
-                const itemTitle = item.querySelector('.portfolio-title').textContent;
-                const itemCategory = item.querySelector('.portfolio-category').textContent;
-                const itemImg = item.querySelector('.portfolio-img').src;
+        document.querySelectorAll('.see-more-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const portfolioItem = button.closest('.portfolio-item');
+                const projectTitle = portfolioItem.querySelector('.portfolio-title').textContent;
+                const projectData = projectDetails[projectTitle];
                 
-                document.querySelector('.modal-title').textContent = itemTitle;
-                document.querySelector('.modal-img').src = itemImg;
-                document.querySelector('.project-info-item:nth-child(2) p').textContent = itemCategory;
-                
-                // Show modal
-                portfolioModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                if (projectData) {
+                    document.querySelector('.modal-title').textContent = projectTitle;
+                    document.querySelector('.modal-img').src = portfolioItem.querySelector('.portfolio-img').src;
+                    document.querySelector('.project-description').textContent = projectData.description;
+                    document.querySelector('.client-name').textContent = projectData.client;
+                    document.querySelector('.project-category').textContent = projectData.category;
+                    
+                    const techContainer = document.querySelector('.project-tech');
+                    techContainer.innerHTML = projectData.technologies.map(tech => 
+                        `<span class="tech-tag">${tech}</span>`
+                    ).join('');
+                    
+                    document.querySelector('.project-testimonial').textContent = projectData.testimonial;
+                    document.querySelector('.project-link').href = projectData.link;
+                    
+                    portfolioModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
             });
         });
-        
+
         modalClose.addEventListener('click', () => {
             portfolioModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         });
         
-        // Close modal when clicking outside
         portfolioModal.addEventListener('click', (e) => {
             if (e.target === portfolioModal) {
                 portfolioModal.classList.remove('active');
@@ -2043,7 +2480,6 @@
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Get form data
             const formData = new FormData(contactForm);
             const formDataObj = {};
             
@@ -2051,17 +2487,25 @@
                 formDataObj[key] = value;
             }
             
-            // Display loading state
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
             try {
-                // Simulate sending email (in a real implementation, you would use a service like EmailJS, Formspree, or a backend)
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                const templateParams = {
+                    from_name: formDataObj.name,
+                    from_email: formDataObj.email,
+                    phone: formDataObj.phone,
+                    subject: formDataObj.subject,
+                    message: formDataObj.message,
+                    budget: formDataObj.budget,
+                    timeline: formDataObj.timeline,
+                    to_email: 'rohan13k@outlook.com'
+                };
                 
-                // Show success message
+                await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams);
+                
                 const formFields = contactForm.querySelectorAll('.input-field');
                 formFields.forEach(field => {
                     field.value = '';
@@ -2070,11 +2514,6 @@
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
                 submitBtn.style.backgroundColor = '#4CAF50';
                 
-                // Email notification would be sent here
-                console.log('Form data to be emailed:', formDataObj);
-                console.log('Would send email to:', 'rohan13k@outlook.com');
-                
-                // Reset button after 3 seconds
                 setTimeout(() => {
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.disabled = false;
@@ -2094,7 +2533,7 @@
             }
         });
         
-        // Scroll to top button with interactive effects
+        // Create scroll to top button
         const createScrollTopButton = () => {
             const scrollBtn = document.createElement('button');
             scrollBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -2135,7 +2574,6 @@
                 });
             });
             
-            // Add hover animation
             scrollBtn.addEventListener('mouseenter', () => {
                 scrollBtn.style.backgroundColor = 'var(--primary-dark)';
                 scrollBtn.style.transform = 'translateY(-5px)';
@@ -2151,73 +2589,81 @@
         
         createScrollTopButton();
         
-        // Dynamic typing effect for hero subtitle
+        // Create typing effect
         const createTypingEffect = () => {
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            const originalText = heroSubtitle.textContent;
-            const typingSpeed = 50;
+            const typingText = document.querySelector('.typing-text');
+            const texts = [
+                "We craft stunning, responsive, and interactive websites that elevate your brand and drive results.",
+                "Transforming your vision into pixel-perfect digital experiences that captivate and convert.",
+                "Building the future of web with cutting-edge technologies and innovative solutions.",
+                "Where creativity meets functionality to create unforgettable digital journeys.",
+                "Based in the UK, working globally to bring your digital vision to life.",
+                "Communicating in English and Spanish, ready to collaborate worldwide."
+            ];
             
-            // Clear text initially
-            heroSubtitle.textContent = '';
+            let currentTextIndex = 0;
+            let currentCharIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 50;
+            let deletingSpeed = 30;
+            let pauseTime = 2000;
             
-            let i = 0;
-            
-            const typeText = () => {
-                if (i < originalText.length) {
-                    heroSubtitle.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeText, typingSpeed);
+            const type = () => {
+                const currentText = texts[currentTextIndex];
+                
+                if (isDeleting) {
+                    typingText.textContent = currentText.substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                    typingSpeed = deletingSpeed;
+                } else {
+                    typingText.textContent = currentText.substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                    typingSpeed = 50;
                 }
+                
+                if (!isDeleting && currentCharIndex === currentText.length) {
+                    isDeleting = true;
+                    typingSpeed = pauseTime;
+                } else if (isDeleting && currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentTextIndex = (currentTextIndex + 1) % texts.length;
+                    typingSpeed = 500;
+                }
+                
+                setTimeout(type, typingSpeed);
             };
             
-            // Start typing effect
-            setTimeout(typeText, 1000);
+            setTimeout(type, 1000);
         };
         
         createTypingEffect();
-        
-        // Add interactive 3D tilt effect to service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const xPercent = x / rect.width;
-                const yPercent = y / rect.height;
-                
-                const xRotation = (0.5 - yPercent) * 10;
-                const yRotation = (xPercent - 0.5) * 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateY(-10px)`;
-                card.style.transition = 'transform 0.2s ease-out';
-                
-                // Dynamic shadow based on mouse position
-                card.style.boxShadow = `
-                    ${-yRotation}px ${xRotation}px 20px rgba(138, 43, 226, 0.2),
-                    0 10px 20px rgba(0, 0, 0, 0.1)
-                `;
-            });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 7); // Set to 7 days from now
             
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'rotateX(0) rotateY(0) translateY(0)';
-                card.style.boxShadow = 'none';
-                card.style.transition = 'all 0.5s ease';
-            });
-        });
-        
-        // Add color shift animation to logo
-        const animateLogo = () => {
-            const logoSpan = document.querySelector('.logo span');
-            let hue = 0;
+            const now = new Date().getTime();
+            const distance = endDate - now;
             
-            setInterval(() => {
-                hue = (hue + 1) % 360;
-                logoSpan.style.color = `hsl(${hue}, 100%, 60%)`;
-            }, 50);
-        };
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.countdown-timer').innerHTML = '<h3>Offer Expired!</h3>';
+            }
+        }
         
-        animateLogo();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
